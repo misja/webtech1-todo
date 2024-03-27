@@ -1,5 +1,6 @@
 from forms import TaskForm
 from models import db, Task
+from filters import type_to_name, time_from_now
 from flask import Flask, render_template, redirect, flash, url_for, request
 
 app = Flask(__name__)
@@ -7,6 +8,9 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = "xsfd567sha905ea54p0"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///app.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+app.jinja_env.filters["type_to_name"] = type_to_name
+app.jinja_env.filters["time_from_now"] = time_from_now
 
 db.init_app(app)
 

@@ -8,9 +8,7 @@
     <div class="row py-lg-5">
         <div class="col-lg-6 col-md-8 mx-auto">
             <h1 class="fw-light">Organize your tasks</h1>
-            <p class="lead text-body-secondary">Something short and leading about the collection below—its contents, the
-                creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.
-            </p>
+            <p class="lead text-body-secondary">Get stuff done!</p>
             <p>
                 <a href="{{ url_for('create_task') }}" class="btn btn-primary my-2">Add a task</a>
             </p>
@@ -18,14 +16,18 @@
     </div>
 </section>
 
-<section class="album py-5 container">
+<section class="album container">
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         {% for task in tasks %}
         <div class="col">
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <h5 class="card-title">{{ task.title }}</h5>
+                    <h5 class="card-title">{{ task.title }} <span class="badge text-bg-secondary">{{
+                            task.type|type_to_name|lower}}</span></h5>
                     <p class="card-text">{{ task.description }}</p>
+                    <p>
+                        <small class="text-body-secondary">Deadline in {{ task.deadline|time_from_now}}</small>
+                    </p>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
                             <a href="{{ url_for('read_task', task_id=task.id) }}"
@@ -35,7 +37,6 @@
                             <a href="{{ url_for('delete_task', task_id=task.id) }}"
                                 class="btn btn-sm  btn-outline-danger" role="button">Delete</a>
                         </div>
-                        <small class="text-body-secondary">9 mins</small>
                     </div>
                 </div>
             </div>
