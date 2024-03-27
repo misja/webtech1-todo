@@ -1,3 +1,4 @@
+from models import TaskType
 from flask_wtf import FlaskForm
 from wtforms.validators import InputRequired
 from wtforms import StringField, BooleanField, SelectField, DateField, SubmitField
@@ -10,11 +11,7 @@ class TaskForm(FlaskForm):
     completed = BooleanField("Completed")
     type = SelectField(
         "Type",
-        choices=[
-            (1, "Easy"),
-            (2, "Boring"),
-            (3, "Hard!"),
-        ],
+        choices=[(choice.name, choice.value) for choice in TaskType],
         validators=[InputRequired()],
     )
     submit = SubmitField("Send")

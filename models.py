@@ -1,8 +1,15 @@
+from enum import Enum
+from datetime import datetime, UTC
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import Mapped, mapped_column
-from datetime import datetime, UTC
 
 db = SQLAlchemy()
+
+
+class TaskType(Enum):
+    EASY = "Easy"
+    BORING = "Boring"
+    HARD = "Hard"
 
 
 class TimestampModel(db.Model):
@@ -19,6 +26,6 @@ class Task(TimestampModel):
     id: Mapped[int] = mapped_column(primary_key=True)
     title: Mapped[str]
     description: Mapped[str]
-    type: Mapped[int] = mapped_column(default=1)
-    complete: Mapped[bool] = mapped_column(default=True)
+    type: Mapped[TaskType] = mapped_column(default=TaskType.EASY)
+    completed: Mapped[bool] = mapped_column(default=True)
     deadline: Mapped[datetime]
