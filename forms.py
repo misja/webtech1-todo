@@ -11,6 +11,7 @@ class TaskForm(FlaskForm):
     completed = BooleanField("Completed")
     type = SelectField(
         "Type",
+        # wtf is dated and doesn't know enums, convert to a list of options
         choices=[(choice.name, choice.value) for choice in TaskType],
         validators=[InputRequired()],
     )

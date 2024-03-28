@@ -11,6 +11,13 @@ class TaskType(Enum):
     BORING = "Boring"
     HARD = "Hard"
 
+    def __str__(self):
+        """Makes wtf match the proper name in forms
+
+        See https://stackoverflow.com/a/53438447
+        """
+        return str(self.name)
+
 
 class TimestampModel(db.Model):
     __abstract__ = True
